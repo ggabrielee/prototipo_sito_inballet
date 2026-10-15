@@ -1,0 +1,4376 @@
+/* RESET E STILI BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    background-color: #fcf9f2; /* Il nostro avorio rilassante */
+}
+
+/* HEADER E LOGO */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #F6F3EB; /* Stesso colore dello sfondo */
+    position: fixed; /* Mantiene il menu in alto scorrendo la pagina */
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    height: 70px;
+    width: auto;
+    /* Schiarisce l'immagine fino a rendere lo sfondo bianco puro, poi lo fonde */
+    filter: brightness(0);
+}
+
+/* =========================================
+   MENU DI NAVIGAZIONE E TENDINE
+   ========================================= */
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 15px; /* Spazio tra le voci */
+    align-items: center;
+    justify-content: flex-end; /* Spinge il menu tutto a destra */
+}
+
+/* Correzione per le ultime tendine: le facciamo aprire verso sinistra per non uscire dallo schermo */
+.nav-menu ul li:last-child .dropdown-content,
+.nav-menu ul li:nth-last-child(2) .dropdown-content {
+    left: auto; /* Annulla l'allineamento a sinistra */
+    right: 0;   /* Allinea il lato destro della tendina al lato destro della parola */
+}
+
+/* Stile base per tutti i link del menu */
+.nav-menu a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    font-size: 0.8rem; /* Carattere leggermente più piccolo ed elegante */
+    letter-spacing: 0.5px; /* Dà un po' di respiro alle lettere */
+    white-space: nowrap; /* FONDAMENTALE: impedisce alla freccina di andare a capo */
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #a87b51; /* Colore al passaggio del mouse per le voci principali */
+}
+
+/* Voce principale che contiene la tendina */
+.dropdown {
+    position: relative;
+}
+
+/* La tendina vera e propria */
+.dropdown-content {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0; /* Allineata a sinistra rispetto alla voce principale */
+    background-color: #ffffff;
+    min-width: 250px; /* Un po' più larga per i titoli lunghi */
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    padding: 10px 0;
+    flex-direction: column;
+    gap: 0;
+    z-index: 1000;
+}
+
+/* Mostra la tendina al passaggio del mouse */
+.dropdown:hover .dropdown-content {
+    display: flex !important;
+}
+
+/* Stile dei link DENTRO la tendina (non in maiuscolo per leggibilità) */
+.dropdown-content a {
+    padding: 12px 20px;
+    display: block;
+    font-size: 0.85rem;
+    text-transform: none; /* Mantiene le maiuscole/minuscole originali */
+    font-weight: 500;
+}
+
+.dropdown-content a:hover {
+    background-color: #F6F3EB; /* Usa il colore panna di sfondo al passaggio del mouse */
+    color: #a87b51;
+}
+
+/* =========================================
+   LAYOUT HOME PAGE - IL SIPARIO IMMERSIVO
+   ========================================= */
+
+.home-wow-page {
+    background-color: #F6F3EB;
+    overflow-x: hidden;
+}
+
+/* --- L'Impatto a Tutto Schermo (Hero) --- */
+.wow-hero {
+    position: relative;
+    min-height: 100vh; /* Prende tutto lo schermo esatto */
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    margin-bottom: 120px;
+}
+
+/* Scritta gigante animata sullo sfondo */
+.wow-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16vw; /* Scala in base alla larghezza dello schermo */
+    font-weight: 800;
+    color: rgba(168, 123, 81, 0.04); /* Quasi invisibile, dà solo texture */
+    white-space: nowrap;
+    letter-spacing: -2px;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+.wow-hero-content {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* L'immagine maestosa con animazione d'ingresso (Reveal) */
+.wow-image-wrapper {
+    flex: 1.3; /* Prende molto spazio */
+    height: 75vh; /* Molto alta */
+    overflow: hidden;
+    box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
+    /* Animazione pazzesca all'apertura del sito */
+    animation: reveal-image 2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes reveal-image {
+    0% { clip-path: inset(100% 0 0 0); transform: scale(1.1); }
+    100% { clip-path: inset(0 0 0 0); transform: scale(1); }
+}
+
+.wow-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.1) grayscale(20%); /* Leggermente desaturata per eleganza estrema */
+}
+
+/* La Card che si sovrappone (L'effetto WOW) */
+.wow-intro-card {
+    flex: 0.8;
+    background-color: #ffffff;
+    padding: 70px 60px;
+    margin-left: -120px; /* Sale sopra l'immagine! */
+    margin-top: 100px; /* Si sbilancia in basso */
+    box-shadow: -15px 30px 60px rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 3;
+    /* Animazione di entrata ritardata */
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fade-up 1s ease 1.5s forwards; /* Appare dopo l'immagine */
+}
+
+@keyframes fade-up {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.wow-intro-card .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 25px;
+}
+
+.wow-intro-card h1 {
+    font-size: 4rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.wow-intro-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 40px;
+}
+
+/* Pulsante minimal d'alta classe */
+.scroll-discover {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #222;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+.scroll-discover .line-arrow {
+    width: 40px;
+    height: 1px;
+    background-color: #222;
+    margin-left: 15px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.scroll-discover:hover { color: #a87b51; }
+.scroll-discover:hover .line-arrow { width: 70px; background-color: #a87b51; }
+
+/* --- La nostra essenza (Impaginazione Editoriale) --- */
+.wow-manifesto {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 100px 5% 150px 5%;
+}
+
+.manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* 1 parte titolo, 2 parti testo */
+    gap: 80px;
+}
+
+.manifesto-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.1;
+    text-transform: uppercase;
+    position: sticky; /* Rimane fermo mentre leggi il testo a destra! */
+    top: 150px; 
+}
+
+/* Il grande capolettera iniziale */
+.manifesto-dropcap {
+    font-size: 1.25rem;
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.manifesto-dropcap::first-letter {
+    font-family: 'Georgia', serif;
+    font-size: 5rem;
+    color: #a87b51;
+    float: left;
+    margin-right: 15px;
+    line-height: 0.8;
+    margin-top: 5px;
+}
+
+/* LA MAGIA DELLE COLONNE: Il testo si divide in 2 automaticamente */
+.manifesto-columns {
+    column-count: 2;
+    column-gap: 50px;
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+}
+
+.manifesto-columns p {
+    margin-bottom: 25px;
+    break-inside: avoid; /* Evita che un paragrafo si spezzi male tra una colonna e l'altra */
+}
+
+/* La citazione (I.N.) evidenziata nel testo */
+.quote-highlight {
+    font-family: 'Georgia', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #a87b51;
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px 0;
+    border-top: 1px solid rgba(168, 123, 81, 0.3);
+    border-bottom: 1px solid rgba(168, 123, 81, 0.3);
+}
+
+/* --- Adattamento Smartphone --- */
+@media (max-width: 950px) {
+    .wow-hero {
+        min-height: auto;
+        padding-top: 120px;
+        margin-bottom: 60px;
+    }
+    .wow-bg-text { font-size: 28vw; top: 150px; } /* Più grande e più in alto su mobile */
+    .wow-hero-content {
+        flex-direction: column;
+    }
+    .wow-image-wrapper { height: 50vh; width: 100%; }
+    .wow-intro-card {
+        margin-left: 0;
+        margin-top: -60px; /* Sale sopra la foto dal basso */
+        width: 90%;
+        padding: 40px 30px;
+    }
+    .wow-intro-card h1 { font-size: 3rem; }
+    
+    .manifesto-grid { grid-template-columns: 1fr; gap: 40px; }
+    .manifesto-title { position: static; font-size: 2.8rem; }
+    .manifesto-columns { column-count: 1; } /* Su mobile torna a una colonna per leggibilità */
+}
+
+/* =========================================
+   SEZIONE SOSTENITORI
+   ========================================= */
+.sostenitori {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 30px 50px;
+}
+
+.sostenitori-title {
+    flex: 0 0 250px; /* Larghezza fissa per il titolo */
+}
+
+.sostenitori-title h3 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #111;
+    line-height: 1.2;
+}
+
+.carousel-container {
+    flex: 1;
+    overflow-x: hidden; /* Nasconde ciò che esce dai bordi */
+    cursor: grab; /* Mostra la "manina" per trascinare */
+}
+
+.carousel-container:active {
+    cursor: grabbing;
+}
+
+.carousel-track {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    width: max-content;
+    /* Animazione automatica: ci mette 20 secondi a fare un giro. Lineare e infinita */
+    animation: scorriLoghi 20s linear infinite;
+}
+
+/* Quando il mouse passa sui loghi, l'animazione si ferma per farli guardare */
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+.carousel-track img {
+    height: 50px; /* Altezza dei loghi */
+    width: auto;
+    object-fit: contain;
+    /* Opzionale: li rende tutti grigi per uniformità, toglilo se li vuoi colorati */ 
+    transition: filter 0.3s ease;
+}
+
+
+@keyframes scorriLoghi {
+    0% { transform: translateX(0); }
+    /* Si sposta esattamente della metà (dove iniziano le immagini duplicate) per non far notare lo stacco */
+    100% { transform: translateX(-50%); } 
+}
+
+/* =========================================
+   FOOTER SCURO ED ELEGANTE
+   ========================================= */
+.elegant-dark-footer {
+    background-color: #1A1A18; /* Un nero molto caldo e profondo */
+    padding: 80px 50px 30px 50px;
+}
+
+.elegant-dark-footer .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+}
+
+.elegant-dark-footer .footer-brand {
+    flex: 1;
+    max-width: 350px;
+}
+
+/* Gestione Logo */
+.footer-logo-dark {
+    height: 70px;
+    width: auto;
+    margin-bottom: 25px;
+    /* Trasforma qualsiasi logo scuro in bianco puro brillante */
+    filter: brightness(0) invert(1); 
+}
+
+.elegant-dark-footer .footer-slogan {
+    font-size: 0.95rem;
+    color: #A09D96; /* Un grigio caldo per un contrasto morbido */
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.elegant-dark-footer .footer-info-grid {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 70px;
+}
+
+/* Titoli delle colonne */
+.elegant-dark-footer .info-block h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+    color: #a87b51; /* Il dorato spicca benissimo sul nero */
+}
+
+/* Testi delle colonne */
+.elegant-dark-footer .info-block p {
+    font-size: 0.95rem;
+    color: #D3D0C8; /* Panna chiaro, meno accecante del bianco */
+    line-height: 1.8;
+}
+
+/* Riga inferiore */
+.footer-bottom-dark {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid #33312E; /* Linea di separazione invisibile ma strutturata */
+}
+
+.footer-bottom-dark p {
+    font-size: 0.85rem;
+    color: #77746E;
+}
+
+/* Icone Social */
+.footer-bottom-dark .social-icons a {
+    color: #D3D0C8;
+    font-size: 1.3rem;
+    margin-left: 20px;
+    display: inline-block;
+    transition: color 0.3s, transform 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-bottom-dark .social-icons a:hover {
+    color: #a87b51;
+    transform: translateY(-5px); /* Sollevamento al passaggio del mouse */
+}
+
+/* =========================================
+   LAYOUT ALTRI SERVIZI (HERO + TESTO CENTRATO)
+   ========================================= */
+
+.page-content-wrapper {
+    background-color: #F6F3EB; /* Mantiene la continuità con il crema del sito */
+    padding-top: 80px; /* Evita che il menu fisso copra l'immagine */
+    min-height: 100vh;
+}
+
+/* --- La Copertina (Hero) --- */
+.page-hero {
+    position: relative;
+    width: 100%;
+    height: 55vh; /* Occupa poco più di metà schermo, molto d'impatto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45); /* Scurisce la foto elegantemente per far leggere il titolo */
+    z-index: 2;
+}
+
+.hero-title {
+    position: relative;
+    z-index: 3;
+    color: #ffffff;
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-align: center;
+    text-shadow: 2px 4px 15px rgba(0,0,0,0.4); /* Ombra per staccare il testo dallo sfondo */
+}
+
+/* --- Il Testo Centrale --- */
+.page-text-container {
+    max-width: 1100px; /* La magia è qui: il testo non si allargherà mai troppo, restando facilissimo da leggere */
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center; /* Stile da catalogo d'arte */
+}
+
+.lead-text-centered {
+    font-size: 1.35rem;
+    color: #a87b51; /* Il tuo color terra/dorato */
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.text-body-elegant p {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.9; /* Molto spazio tra le righe per dare respiro */
+    margin-bottom: 25px;
+}
+
+/* =========================================
+   GRIGLIA EDITORIALE (3 COLONNE)
+   ========================================= */
+
+.editorial-grid-section {
+    max-width: 1100px; /* Più largo del testo singolo, per far respirare le 3 colonne */
+    margin: 0 auto;
+    padding: 80px 40px 100px 40px;
+}
+
+.grid-intro {
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+    text-align: center;
+}
+
+.grid-intro p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+    font-style: italic; /* Dà un tono più intimo e accogliente all'introduzione */
+}
+
+/* La griglia vera e propria */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crea 3 colonne perfettamente uguali */
+    gap: 50px; /* Ampio spazio tra le colonne */
+}
+
+/* Stile della singola "Card" */
+.editorial-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenitore Immagine (Rende le foto tutte uguali) */
+.card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3; /* Proporzione rettangolare elegante (stile fotografia) */
+    overflow: hidden;
+    margin-bottom: 25px;
+    background-color: #e2ddce; /* Colore di sfondo se la foto carica lentamente */
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Taglia le immagini per farle aderire perfettamente al riquadro */
+    transition: transform 0.5s ease; /* Effetto zoom... */
+}
+
+.editorial-card:hover .card-image-wrapper img {
+    transform: scale(1.05); /* ...quando ci passi sopra col mouse */
+}
+
+/* Testi della Card */
+.editorial-card h3 {
+    font-size: 1.1rem;
+    color: #a87b51; /* Color terra/dorato */
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-align: left; /* Allineamento a sinistra molto più professionale */
+    border-bottom: 1px solid #e2ddce;
+    padding-bottom: 10px;
+}
+
+.editorial-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.quote-author {
+    display: block;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #888;
+    text-align: right;
+    font-style: italic;
+}
+/* Adattamento per i cellulari */
+@media (max-width: 950px) {
+    
+    /* Riduce leggermente l'altezza della foto di copertina per lasciare spazio ai contenuti */
+    .page-hero {
+        height: 40vh; 
+    }
+
+    /* Rimpicciolisce il titolo per non farlo spezzare su troppe righe */
+    .hero-title {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+        padding: 0 15px; /* Evita che il testo tocchi i bordi del telefono */
+    }
+
+    /* Riduce i margini enormi del testo centrale */
+    .page-text-container {
+        padding: 50px 20px 40px 20px;
+    }
+
+    .lead-text-centered {
+        font-size: 1.15rem;
+        margin-bottom: 25px;
+    }
+
+    /* Riduce i padding laterali per sfruttare tutto lo schermo */
+    .editorial-grid-section {
+        padding: 20px 20px 80px 20px;
+    }
+
+    /* LA MODIFICA PIÙ IMPORTANTE: trasforma le 3 colonne in 1 colonna singola */
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 60px; /* Aumenta leggermente lo stacco tra una notizia e l'altra per far capire dove finisce una e inizia l'altra */
+    }
+
+    /* Regola il testo interno alle card per una lettura più comoda su mobile */
+    .editorial-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .grid-intro {
+        margin-bottom: 40px;
+    }
+}
+
+/* =========================================
+   LAYOUT ATELIER (STICKY SIDEBAR & SCROLL)
+   ========================================= */
+
+.atelier-page {
+    background-color: #F6F3EB;
+    padding: 150px 5% 100px 5%; /* Spazio superiore per non coprire il menu */
+}
+
+.atelier-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 100px;
+    align-items: flex-start; /* Fondamentale per far funzionare lo sticky */
+}
+
+/* Colonna Sinistra (Il testo che resta fermo) */
+.atelier-sticky-sidebar {
+    flex: 1;
+    position: sticky;
+    top: 150px; /* Si blocca a 150px dal bordo superiore quando si scorre giù */
+    padding-right: 20px;
+}
+
+.eyebrow {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    color: #a87b51;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.atelier-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #222;
+    margin-bottom: 30px;
+    line-height: 1.1;
+}
+
+.atelier-intro {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.9;
+}
+
+/* Colonna Destra (I testi che scorrono) */
+.atelier-scroll-content {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 80px; /* Crea uno stacco enorme ed elegante tra le fasce d'età */
+}
+
+.age-group-block {
+    position: relative;
+    padding: 40px 0;
+    border-top: 1px solid #e2ddce; /* Linea sottile che separa le sezioni */
+}
+
+/* L'enorme numero in filigrana sullo sfondo */
+.age-number {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    font-size: 10rem;
+    font-weight: 300;
+    color: rgba(168, 123, 81, 0.08); /* Color terra/dorato ma quasi trasparente */
+    line-height: 1;
+    z-index: 0;
+    pointer-events: none; /* Evita che il numero dia fastidio al mouse */
+}
+
+.age-title {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #222;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.age-desc {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* Adattamento per i cellulari (Il testo a sinistra smette di essere fisso e va in alto) */
+@media (max-width: 900px) {
+    .atelier-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .atelier-sticky-sidebar {
+        position: relative;
+        top: 0;
+    }
+    .age-number {
+        font-size: 6rem;
+        top: -10px;
+    }
+}
+
+/* =========================================
+   LAYOUT FORMAZIONE (OFFSET OVERLAP CARD)
+   ========================================= */
+
+.formazione-page {
+    background-color: #F6F3EB;
+    padding: 140px 5% 120px 5%; /* Spazio per non far coprire l'inizio dal menu fisso */
+    min-height: 100vh;
+}
+
+.overlap-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end; /* Allinea gli elementi verso il basso */
+    justify-content: flex-end; /* Spinge il contenuto verso destra */
+}
+
+/* Gestione della grande immagine a sinistra */
+.overlap-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 65%; /* Occupa più di metà schermo */
+    height: 650px;
+    z-index: 1; /* Sta "sotto" al testo */
+}
+
+.overlap-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: -15px 15px 0px rgba(168, 123, 81, 0.15); /* Elegante ombra solida color terra */
+}
+
+/* Gestione del riquadro di testo bianco */
+.overlap-text-card {
+    position: relative;
+    z-index: 2; /* Sta "sopra" all'immagine */
+    width: 45%; /* Larghezza studiata per sbordare e sovrapporsi alla foto */
+    background-color: #ffffff; /* Bianco puro per staccare dal crema dello sfondo */
+    padding: 70px 60px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.08); /* Ombra morbidissima per l'effetto fluttuante */
+    margin-top: 250px; /* Spinge il riquadro verso il basso */
+}
+
+/* Stile della tipografia */
+.overlap-text-card .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: block;
+    font-weight: 600;
+}
+
+.formazione-title {
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: #222;
+    margin-bottom: 30px;
+    line-height: 1.1;
+}
+
+.overlap-text-card p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* Bottone minimalista chic */
+.elegant-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 0;
+    color: #222;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #a87b51; /* Linea sotto invece del classico bottone */
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.elegant-btn:hover {
+    color: #a87b51;
+    border-bottom: 2px solid #222;
+}
+
+/* --- Adattamento perfetto per Smartphone --- */
+@media (max-width: 900px) {
+    .overlap-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .overlap-image {
+        position: relative;
+        width: 100%;
+        height: 400px;
+    }
+    .overlap-image img {
+        box-shadow: none; /* Rimuove l'ombra laterale su mobile */
+    }
+    .overlap-text-card {
+        width: 90%; /* Si restringe un po' */
+        margin-top: -60px; /* Si sovrappone solo dal basso verso l'alto */
+        padding: 40px 30px;
+    }
+}
+
+/* =========================================
+   LAYOUT ATTIVITA MOTORIE
+   ========================================= */
+
+/* =========================================
+   LAYOUT YOGA (LOOKBOOK ZIG-ZAG)
+   ========================================= */
+
+.yoga-page {
+    background-color: #F6F3EB;
+    padding: 150px 5% 100px 5%;
+}
+
+/* --- Introduzione (Titolo Sx, Testo Dx) --- */
+.yoga-intro {
+    max-width: 1200px;
+    margin: 0 auto 100px auto;
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+}
+
+.yoga-intro-left {
+    flex: 1;
+}
+
+.yoga-intro-left .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.yoga-title {
+    font-size: 4rem; /* Un titolo gigante ed elegante */
+    font-weight: 300;
+    color: #222;
+    line-height: 1;
+}
+
+.yoga-intro-right {
+    flex: 2; /* Il testo prende più spazio del titolo */
+}
+
+/* Il Capolettera per la prima parola del testo */
+.dropcap::first-letter {
+    font-size: 3.5rem;
+    float: left;
+    margin-right: 12px;
+    line-height: 0.8;
+    color: #a87b51;
+    font-weight: 400;
+}
+
+.yoga-intro-right p {
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* --- I 3 Concetti a Zig-Zag --- */
+.yoga-features {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-row {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    padding: 80px 0;
+    border-top: 1px solid #e2ddce; /* Riga di separazione elegante */
+}
+
+/* La classe "reverse" scambia l'ordine della foto e del testo per la riga 02 */
+.feature-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.feature-image {
+    flex: 1.2;
+}
+
+.feature-image img {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Proporzione cinematografica rettangolare */
+    object-fit: cover;
+    filter: grayscale(100%); /* Le foto diventano in bianco e nero in automatico! */
+    transition: filter 0.5s ease;
+}
+
+/* Se passi col mouse, la foto si colora (Opzionale ma bellissimo) */
+.feature-image img:hover {
+    filter: grayscale(0%);
+}
+
+.feature-text {
+    flex: 1;
+    padding: 0 40px;
+}
+
+.feature-num {
+    font-size: 1.2rem;
+    color: #a87b51;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.feature-text h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.feature-text p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.9;
+}
+
+/* --- Adattamento per Cellulari --- */
+@media (max-width: 900px) {
+    .yoga-intro {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .feature-row, .feature-row.reverse {
+        flex-direction: column; /* Su mobile tornano tutti in colonna dritta */
+        gap: 30px;
+        padding: 50px 0;
+    }
+    .feature-text {
+        padding: 0;
+    }
+}
+
+/* =========================================
+   LAYOUT PILATES (OFFSET ASYMMETRIC GRID)
+   ========================================= */
+
+.pilates-page {
+    background-color: #F6F3EB;
+    padding: 160px 8% 120px 8%; /* Più margine ai lati per valorizzare l'asimmetria */
+}
+
+/* --- Introduzione Asimmetrica --- */
+.pilates-hero-split {
+    max-width: 1200px;
+    margin: 0 auto 120px auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Due blocchi quasi uguali ma sfasati */
+    gap: 80px;
+}
+
+.split-visual-block {
+    padding-top: 10px;
+}
+
+.split-visual-block .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.pilates-main-title {
+    font-size: 5rem; /* Un titolo monumentale */
+    font-weight: 300;
+    color: #222;
+    line-height: 0.9;
+    margin-bottom: 30px;
+}
+
+.decorative-line {
+    width: 60px;
+    height: 3px;
+    background-color: #a87b51;
+}
+
+.split-text-block .accent-paragraph {
+    font-size: 1.2rem; /* Il primo paragrafo è più grande per guidare la lettura */
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.split-text-block p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* --- Focus a Griglia Asimmetrica (Verticale) --- */
+.pilates-focus-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 160px; /* Grande spazio tra i blocchi per creare asimmetria */
+}
+
+.asymmetric-row {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+
+/* Configurazione 01 e 03: Foto a sinistra (più grande) e testo a destra */
+.asymmetric-row.col-left {
+    padding-right: 10%;
+}
+
+.asymmetric-row.col-left .asymmetric-img-box {
+    flex: 1.3;
+}
+
+.asymmetric-row.col-left .asymmetric-text-box {
+    flex: 1;
+}
+
+/* Configurazione 02: Foto a destra e testo a sinistra (più distanti) */
+.asymmetric-row.col-right {
+    flex-direction: row-reverse;
+    padding-left: 10%;
+}
+
+.asymmetric-row.col-right .asymmetric-img-box {
+    flex: 1.1; /* Più piccola per sbilanciare l'andamento */
+}
+
+.asymmetric-row.col-right .asymmetric-text-box {
+    flex: 1.2;
+}
+
+/* I Box Immagine (Foto verticali) */
+.asymmetric-img-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Taglio verticale elegante e asimmetrico, stile rivista */
+    overflow: hidden;
+    background-color: #e2ddce;
+}
+
+.asymmetric-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: transform 0.8s ease, filter 0.8s ease;
+}
+
+.asymmetric-row:hover .asymmetric-img-box img {
+    transform: scale(1.05); /* Lieve zoom all'avvicinarsi del mouse */
+    filter: grayscale(0%); /* Torna il colore, se desiderato */
+}
+
+/* I Box di Testo */
+.asymmetric-text-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.focus-number {
+    font-size: 3rem; /* Un numero grande ma sottile */
+    font-weight: 300;
+    color: rgba(168, 123, 81, 0.3); /* Color oro/terra tenue */
+    line-height: 1;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.asymmetric-text-box h2 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #222;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.asymmetric-text-box p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.95;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 900px) {
+    .pilates-hero-split {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin-bottom: 80px;
+    }
+    .pilates-main-title {
+        font-size: 3.5rem;
+    }
+    .asymmetric-row, .asymmetric-row.col-right {
+        flex-direction: column; /* Si impilano in verticale */
+        gap: 40px;
+        padding: 0;
+    }
+    .pilates-focus-grid {
+        gap: 80px;
+    }
+}
+
+/* =========================================
+   LAYOUT ATTIVITÀ (FRAMED OFFSET GALLERY)
+   ========================================= */
+
+.framed-page {
+    background-color: #F6F3EB;
+    padding: 160px 6% 120px 6%;
+    min-height: 100vh;
+}
+
+.framed-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 80px;
+    align-items: center; /* Allinea gli elementi verticalmente */
+    position: relative;
+}
+
+/* --- Lato Sinistro (Contenuto e Cornici) --- */
+.framed-content-block {
+    flex: 1;
+    z-index: 2;
+}
+
+.eyebrow-accent {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.framed-main-title {
+    font-size: 4rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.1;
+    margin-bottom: 40px;
+}
+
+/* La Cornice di Testo elegante con bordo a sinistra */
+.elegant-text-frame {
+    border-left: 2px solid #a87b51; /* Sottile linea di focus dorata */
+    padding-left: 35px;
+    margin-bottom: 50px;
+}
+
+.frame-lead {
+    font-size: 1.15rem;
+    color: #333;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.elegant-text-frame p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+}
+
+/* La piccola griglia asimmetrica sotto al testo */
+.frame-sub-info {
+    display: flex;
+    gap: 40px;
+    padding-left: 37px; /* Allineato con l'interno della linea dorata */
+}
+
+.info-item {
+    flex: 1;
+}
+
+.info-item h4 {
+    font-size: 0.8rem;
+    color: #222;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.info-item p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* --- Lato Destro (L'Opera d'Arte Incorniciata) --- */
+.framed-art-block {
+    flex: 1.2;
+    position: relative;
+    padding: 30px; /* Crea lo spazio asimmetrico per la cornice di sfondo */
+}
+
+.art-frame-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5; /* Taglio verticale quasi monumentale */
+    overflow: hidden;
+    z-index: 2; /* Sta sopra alla base offset */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+}
+
+.art-frame-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(10%);
+    transition: transform 1.2s cubic-bezier(0.15, 0.85, 0.35, 1);
+}
+
+.framed-art-block:hover .art-frame-wrapper img {
+    transform: scale(1.04);
+}
+
+/* Dettaglio Captions geometrico float, per dare un tocco d'arte */
+.floating-caption {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background-color: #ffffff;
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 3;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.caption-num {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #a87b51;
+    border-right: 1px solid #e2ddce;
+    padding-right: 15px;
+}
+
+.caption-text {
+    font-size: 0.8rem;
+    color: #444;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* L'ombra offset solida come sfondo */
+.solid-offset-bg {
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    bottom: 0px;
+    left: 50px;
+    background-color: #e2ddce; /* Splendida tonalità calda in secondo piano */
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .framed-container {
+        flex-direction: column;
+        gap: 60px;
+    }
+    .framed-main-title {
+        font-size: 3.2rem;
+    }
+    .framed-art-block {
+        width: 100%;
+        padding: 15px;
+    }
+    .solid-offset-bg {
+        top: 30px;
+        left: 30px;
+    }
+    .frame-sub-info {
+        flex-direction: column;
+        gap: 25px;
+    }
+}
+
+/* =========================================
+   LAYOUT DANZA INTEGRATIVA 
+   ========================================= */
+
+/* =========================================
+   LAYOUT CLASSI MULTIDISCIPLINARI INTEGRATE (MONOLITE EDITORIALE)
+   ========================================= */
+
+.monolite-page {
+    background-color: #F6F3EB;
+    padding: 220px 5% 150px 5%; /* Spazio extra sopra per il titolo gigante */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.monolite-container {
+    position: relative;
+    max-width: 900px; /* Non troppo largo, per mantenere l'eleganza */
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* --- Il Titolo Gigante Sfalsato (Con Effetto Camaleonte) --- */
+.monolite-title {
+    position: absolute;
+    top: -50px; /* Leggermente abbassato per farci stare 3 righe */
+    left: -40px;
+    z-index: 3;
+    font-size: 5rem; /* Rimpicciolito un po' perché "Multidisciplinari" è lunghissima */
+    font-weight: 300;
+    line-height: 0.95;
+    pointer-events: none;
+    
+    /* LA MAGIA: Il colore si inverte in automatico a contrasto con lo sfondo */
+    color: #ffffff; 
+    mix-blend-mode: difference; 
+}
+
+.monolite-title span {
+    display: block;
+}
+
+.title-line2 {
+    margin-left: 60px; /* Sposta la seconda parola verso destra */
+}
+
+.title-line3 {
+    margin-left: 120px; /* Sposta la terza parola ancora più a destra */
+    font-style: italic; /* Dà un tocco di eleganza finale */
+}
+
+/* --- L'Immagine Centrale --- */
+.monolite-image {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    aspect-ratio: 4 / 5; /* Rettangolo verticale elegante */
+    z-index: 1; /* Sta sotto al testo e al titolo */
+    box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+}
+
+.monolite-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Il Riquadro di Testo --- */
+.monolite-text-box {
+    position: absolute;
+    bottom: -60px;
+    right: -40px;
+    width: 55%; /* Occupa poco più di metà dell'immagine */
+    background-color: #ffffff;
+    padding: 50px 60px;
+    z-index: 2; /* Sta sopra l'immagine */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+}
+
+.monolite-text-box .eyebrow {
+    display: block;
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.monolite-text-box p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.monolite-text-box p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 900px) {
+    .monolite-page {
+        padding: 150px 5% 80px 5%;
+    }
+    .monolite-title {
+        position: relative;
+        top: 0;
+        left: 0;
+        font-size: 4rem;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .title-line2 {
+        margin-left: 0;
+    }
+    .monolite-image {
+        width: 100%;
+    }
+    .monolite-text-box {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        width: 90%;
+        margin: -80px auto 0 auto; /* Si sovrappone dal basso al centro */
+        padding: 40px 30px;
+    }
+}
+
+/* =========================================
+   LAYOUT NOI CON VOI (ARCHWAY / PORTALE)
+   ========================================= */
+
+.archway-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center; /* Centra tutto verticalmente */
+}
+
+.archway-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* --- Colonna Sinistra (Titolo) --- */
+.archway-text-left {
+    flex: 1;
+    text-align: right; /* Allinea il testo verso l'immagine */
+    padding-right: 20px;
+    z-index: 2; /* Sta sopra l'immagine */
+}
+
+.archway-text-left .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.archway-title {
+    font-size: 4.2rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.1;
+    /* Sposta il titolo a destra per farlo accavallare all'arco! */
+    margin-right: -70px; 
+}
+
+.accent-italic {
+    font-family: 'Georgia', serif; /* Font graziato per dare eleganza */
+    font-style: italic;
+    color: #a87b51;
+    font-size: 4.8rem; /* Leggermente più grande del testo normale */
+}
+
+/* --- Colonna Centrale (Immagine ad Arco) --- */
+.archway-image-center {
+    flex: 1.2; /* L'immagine è l'elemento più largo */
+    position: relative;
+    z-index: 1;
+}
+
+/* La forma ad arco */
+.arch-window {
+    width: 100%;
+    aspect-ratio: 2 / 3; /* Proporzione rettangolare verticale */
+    overflow: hidden;
+    background-color: #e2ddce;
+    /* La regola che crea la magia: arrotonda in modo enorme solo i due angoli in alto */
+    border-radius: 300px 300px 0 0; 
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+}
+
+.arch-window img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(15%) hue-rotate(-10deg); /* Dà una sfumatura calda e poetica alla foto */
+    transition: transform 1s ease;
+}
+
+.arch-window:hover img {
+    transform: scale(1.05); /* Zoom morbidissimo al passaggio del mouse */
+}
+
+/* --- Colonna Destra (Testo) --- */
+.archway-text-right {
+    flex: 1;
+    padding-left: 40px; /* Si allontana dall'immagine */
+}
+
+.arch-lead {
+    font-size: 1.1rem;
+    color: #a87b51;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.archway-text-right p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .archway-container {
+        flex-direction: column; /* Impila gli elementi verticalmente */
+        gap: 60px;
+    }
+    .archway-text-left {
+        text-align: center;
+        padding-right: 0;
+    }
+    .archway-title {
+        margin-right: 0; /* Rimuove l'accavallamento */
+        font-size: 3.8rem;
+    }
+    .archway-image-center {
+        width: 85%; /* Riduce leggermente la larghezza su mobile */
+    }
+    .arch-window {
+        border-radius: 150px 150px 0 0; /* Adatta l'arco allo schermo piccolo */
+    }
+    .archway-text-right {
+        padding-left: 0;
+        text-align: center;
+    }
+}
+
+/* =========================================
+   LAYOUT SPORTELLO PSICOLOGICO BAMBINO (ORGANIC FLUID)
+   ========================================= */
+
+.child-support-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+    overflow: hidden; /* Evita che forme troppo ampie creino barre di scorrimento */
+}
+
+.organic-layout-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+/* --- Lato Testo --- */
+.organic-text-side {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.organic-text-side .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.organic-title {
+    font-size: 3.8rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+
+.organic-lead {
+    font-size: 1.3rem;
+    color: #a87b51;
+    font-style: italic;
+    margin-bottom: 30px;
+    font-family: 'Georgia', serif;
+}
+
+.organic-text-side p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* --- Lato Immagine --- */
+.organic-image-side {
+    flex: 1.1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+/* La Maschera Fluida con Effetto "Respiro" */
+.fluid-image-mask {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Un quadrato di base */
+    overflow: hidden;
+    background-color: #e2ddce;
+    box-shadow: 0 30px 60px rgba(168, 123, 81, 0.15);
+    
+    /* Forma organica irregolare iniziale */
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    
+    /* Attivazione dell'animazione CSS */
+    animation: morph 8s ease-in-out infinite;
+}
+
+.fluid-image-mask img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Un filtro per rendere la foto leggermente più calda e sognante */
+    filter: sepia(10%) contrast(95%);
+}
+
+/* Il Badge Fluttuante */
+.floating-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    background-color: #ffffff;
+    padding: 15px 25px;
+    border-radius: 40px; /* Bordi molto arrotondati */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    z-index: 2;
+    animation: float 5s ease-in-out infinite; /* Leggero movimento su e giù */
+}
+
+.badge-icon {
+    font-size: 1.2rem;
+    color: #a87b51;
+}
+
+.badge-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* --- Animazioni CSS Magiche --- */
+
+/* Animazione per deformare dolcemente i bordi dell'immagine (Effetto Morph) */
+@keyframes morph {
+    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+/* Animazione per far galleggiare il badge (Effetto Float) */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .organic-layout-container {
+        flex-direction: column-reverse; /* Mette l'immagine sopra e il testo sotto su mobile */
+        gap: 50px;
+    }
+    .organic-image-side {
+        padding: 0;
+        width: 90%;
+    }
+    .organic-text-side {
+        padding-right: 0;
+        text-align: center;
+    }
+    .organic-title {
+        font-size: 3.2rem;
+    }
+    .floating-badge {
+        bottom: -20px;
+        left: auto; /* Centra il badge su mobile */
+    }
+}
+
+/* =========================================
+   LAYOUT SOSTENITORI PROGETTI SOCIALI (OVERLAP BOX)
+   ========================================= */
+
+.supporters-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.supporters-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* --- Il Riquadro di Testo (Sinistra) --- */
+.supporters-text-card {
+    flex: 1.2;
+    background-color: #ffffff;
+    padding: 70px 60px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+    z-index: 2; /* Sta sopra all'immagine */
+    margin-right: -100px; /* LA MAGIA: Spinge la card sopra la foto a destra! */
+    position: relative;
+}
+
+.supporters-text-card .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.supporters-title {
+    font-size: 3.8rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+
+.supporters-lead {
+    font-size: 1.2rem;
+    color: #a87b51;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    margin-bottom: 30px;
+}
+
+.supporters-text-card p:not(.supporters-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* --- Il Bottone Dona Ora --- */
+.donation-action {
+    margin-top: 40px;
+    display: flex;
+    align-items: center; /* Allinea il bottone e la nota testuale */
+    gap: 20px;
+}
+
+.donate-btn {
+    display: inline-block;
+    background-color: #a87b51; /* Colore pieno per risaltare */
+    color: #ffffff;
+    padding: 16px 35px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.donate-btn:hover {
+    background-color: #8c6541; /* Si scurisce leggermente al passaggio del mouse */
+    transform: translateY(-3px); /* Si solleva leggermente */
+}
+
+.donation-note {
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
+}
+
+/* --- L'Immagine (Destra) --- */
+.supporters-image {
+    flex: 1;
+    z-index: 1; /* Sta sotto la card di testo */
+    height: 600px;
+}
+
+.supporters-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9) contrast(1.1); /* Leggero tocco cinematografico */
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .supporters-container {
+        flex-direction: column-reverse; /* Mette l'immagine sopra e il testo sotto */
+    }
+    .supporters-text-card {
+        margin-right: 0;
+        margin-top: -60px; /* Si sovrappone dal basso invece che da sinistra */
+        width: 90%;
+        padding: 50px 30px;
+    }
+    .supporters-image {
+        width: 100%;
+        height: 400px;
+    }
+    .supporters-title {
+        font-size: 3.2rem;
+    }
+    .donation-action {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+/* =========================================
+   LAYOUT URBAN 
+   ========================================= */
+
+/* =========================================
+   LAYOUT HIP HOP (CASCATA DINAMICA)
+   ========================================= */
+
+.hiphop-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+}
+
+/* --- Hero Superiore Dinamico --- */
+.urban-hero {
+    max-width: 1200px;
+    margin: 0 auto 120px auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.urban-hero-content {
+    flex: 1;
+    z-index: 2;
+}
+
+.urban-hero-content .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.urban-title {
+    font-size: 5.5rem;
+    font-weight: 600; /* Leggermente più spesso per l'Hip Hop */
+    text-transform: uppercase;
+    letter-spacing: -2px; /* Lettere più vicine per un look urbano */
+    color: #222;
+    line-height: 0.9;
+    margin-bottom: 30px;
+}
+
+.urban-lead {
+    font-size: 1.25rem;
+    color: #a87b51;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.urban-hero-content p:not(.urban-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.urban-hero-image {
+    flex: 1.2;
+    position: relative;
+}
+
+.urban-hero-image img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    /* Tocco urbano: foto leggermente de-saturata e contrastata */
+    filter: grayscale(40%) contrast(1.1); 
+}
+
+/* Blocco geometrico che "spunta" da sotto la foto */
+.urban-accent-box {
+    position: absolute;
+    top: 40px;
+    right: -30px;
+    bottom: -40px;
+    left: 40px;
+    background-color: #222222; /* Nero antracite a contrasto */
+    z-index: 1;
+}
+
+/* --- Blocco Inferiore (Cascata Sfalsata / Staggered Grid) --- */
+.staggered-grid-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-bottom: 100px; /* Spazio extra per far respirare l'ultimo gradino */
+}
+
+.staggered-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* LA CASCATA: Sfalsamento verticale dei tre blocchi */
+.step-high {
+    transform: translateY(0);
+}
+.step-mid {
+    transform: translateY(80px); /* Scende di 80px */
+}
+.step-low {
+    transform: translateY(160px); /* Scende di 160px */
+}
+
+/* I numeri giganti "vuoti" stile Streetwear */
+.staggered-num {
+    font-size: 6rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    color: transparent; /* Il testo è trasparente */
+    -webkit-text-stroke: 2px #a87b51; /* Mostra solo un contorno color terra */
+    line-height: 0.8;
+    margin-bottom: -30px; /* Si sovrappone fisicamente alla foto sottostante */
+    margin-left: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.staggered-img {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Formato verticale d'impatto */
+    overflow: hidden;
+    margin-bottom: 30px;
+    z-index: 1;
+}
+
+.staggered-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.4s ease;
+}
+
+.staggered-card:hover .staggered-img img {
+    filter: grayscale(0%); /* Il colore torna quando ci passi sopra col mouse */
+}
+
+.staggered-card h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #222;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.staggered-card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .urban-hero {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .urban-accent-box {
+        right: 15px;
+        left: 15px;
+    }
+    .staggered-grid-section {
+        grid-template-columns: 1fr; /* Torna a 1 colonna */
+        gap: 80px;
+        padding-bottom: 0;
+    }
+    /* Su mobile annulliamo l'effetto a cascata, altrimenti si sovrappongono male */
+    .step-high, .step-mid, .step-low {
+        transform: translateY(0); 
+    }
+}
+
+/* =========================================
+   LAYOUT HEELS (FASHION EDITORIAL)
+   ========================================= */
+
+.heels-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.fashion-spread-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+/* --- Lato Immagine --- */
+.fashion-image-side {
+    flex: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* Effetto Passepartout da Mostra Fotografica */
+.fine-art-frame {
+    padding: 20px;
+    border: 1px solid #a87b51; /* Cornicina esterna */
+    background-color: transparent;
+    position: relative;
+}
+
+.fine-art-frame img {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Formato ritratto elegante */
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.1) grayscale(30%); /* Leggermente desaturato per fare "moda" */
+}
+
+/* --- Lato Testo --- */
+.fashion-text-side {
+    flex: 1.1;
+    z-index: 2; /* Sta sopra l'immagine */
+}
+
+.fashion-text-side .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Titolo Invasivo */
+.fashion-title {
+    font-size: 7.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #222;
+    line-height: 0.9;
+    margin-bottom: 35px;
+    
+    /* Il trucco: spinge il titolo fuori dalla sua colonna per sovrapporsi alla foto a sinistra */
+    margin-left: -120px; 
+    
+    /* Aggiunge un sottilissimo alone chiaro dietro al testo per renderlo leggibile se passa su zone scure della foto */
+    text-shadow: 2px 2px 10px rgba(246, 243, 235, 0.8);
+}
+
+.fashion-lead {
+    font-size: 1.15rem;
+    color: #a87b51;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    margin-bottom: 30px;
+}
+
+/* LA MAGIA: Testo diviso in stile Articolo di Giornale */
+.fashion-article {
+    column-count: 2; /* Divide in due colonne! */
+    column-gap: 40px; /* Spazio tra le colonne */
+}
+
+.fashion-article p {
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 15px;
+    /* Evita che i paragrafi si spezzino malamente tra una colonna e l'altra */
+    break-inside: avoid; 
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .fashion-spread-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .fashion-title {
+        margin-left: 0; /* Annulla lo spostamento a sinistra */
+        font-size: 4.5rem;
+        text-shadow: none;
+    }
+    .fine-art-frame {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .fashion-article {
+        column-count: 1; /* Su cellulare torna a 1 singola colonna per leggibilità */
+    }
+}
+
+/* =========================================
+   LAYOUT BREAKING (CUT-OUT)
+   ========================================= */
+
+.breaking-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+}
+
+/* --- Hero Superiore --- */
+.breaking-hero {
+    max-width: 1200px;
+    margin: 0 auto 120px auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.breaking-text-side {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.breaking-text-side .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Titolo inclinato e molto spesso */
+.breaking-title {
+    font-size: 6.5rem;
+    font-weight: 800;
+    font-style: italic; /* Dà un forte senso di movimento/velocità */
+    text-transform: uppercase;
+    color: #222;
+    line-height: 0.9;
+    margin-bottom: 30px;
+    letter-spacing: -2px; /* Stringe le lettere per un look aggressivo */
+}
+
+.breaking-lead {
+    font-size: 1.2rem;
+    color: #a87b51;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.breaking-text-side p:not(.breaking-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.breaking-image-side {
+    flex: 1.2;
+    height: 550px;
+    position: relative;
+}
+
+/* LA MAGIA: L'immagine tagliata a parallelogramma */
+.cutout-image {
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+    /* Crea la forma storta tagliando via gli angoli */
+    clip-path: polygon(15% 0, 100% 0, 85% 100%, 0% 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+.cutout-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1); /* Evita bordi vuoti */
+    transition: transform 0.6s ease;
+}
+
+.cutout-image:hover img {
+    transform: scale(1.1) rotate(-3deg); /* Micro-rotazione aggressiva al passaggio del mouse */
+}
+
+/* --- Blocco Inferiore (3 Sezioni) --- */
+.breaking-focus-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+
+.breaking-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Le 3 immaginine squadrate ma con angoli sfalsati */
+.breaking-card-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    /* Taglio asimmetrico: pende leggermente verso destra */
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+    margin-bottom: 25px;
+    overflow: hidden;
+    background-color: #e2ddce;
+    transition: clip-path 0.4s ease;
+}
+
+/* Quando passi il mouse, l'angolo di pendenza si inverte! */
+.breaking-card:hover .breaking-card-img {
+    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+}
+
+.breaking-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.2); /* Molto drammatiche in bianco e nero */
+    transition: filter 0.4s ease;
+}
+
+.breaking-card:hover .breaking-card-img img {
+    filter: grayscale(0%) contrast(1.1); /* Torna il colore */
+}
+
+.breaking-card-text h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+    color: #222;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.breaking-card-text h2 span {
+    color: #a87b51;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.breaking-card-text p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .breaking-hero {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .breaking-title {
+        font-size: 4.5rem;
+    }
+    .breaking-image-side {
+        width: 100%;
+        height: 400px;
+        padding-left: 0;
+    }
+    .cutout-image {
+        /* Su cellulare togliamo il ritaglio laterale perché restringerebbe troppo l'immagine */
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); 
+    }
+    .breaking-focus-grid {
+        grid-template-columns: 1fr; /* Le 3 foto si impilano in verticale */
+        gap: 60px;
+    }
+}
+
+/* =========================================
+   LAYOUT ACROBATICA (SOSPENSIONE AEREA)
+   ========================================= */
+
+.acrobatica-page {
+    background-color: #F6F3EB;
+    padding: 180px 5% 150px 5%;
+    min-height: 100vh;
+    overflow: hidden; /* Evita che la scritta gigante di sfondo allarghi la pagina */
+}
+
+.levitation-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* --- Scritta Gigante di Sfondo --- */
+.bg-typography {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18rem; /* Enorme */
+    font-weight: 800;
+    color: rgba(168, 123, 81, 0.04); /* Quasi invisibile, solo un'ombra testuale */
+    letter-spacing: 20px;
+    z-index: 1; /* Sta sul fondo */
+    pointer-events: none;
+}
+
+/* --- Immagine Fluttuante --- */
+.floating-image-wrapper {
+    width: 45%; /* L'immagine non è a tutto schermo, ma contenuta come un quadro */
+    aspect-ratio: 3 / 4;
+    position: relative;
+    z-index: 2; /* Sta sopra la scritta gigante */
+    
+    /* L'ombra staccata che crea l'illusione di distanza dal muro */
+    box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+    
+    /* Animazione CSS infinita */
+    animation: levitate 6s ease-in-out infinite;
+}
+
+.floating-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Animazione del galleggiamento aereo */
+@keyframes levitate {
+    0% { transform: translateY(0px); box-shadow: 0 40px 80px rgba(0,0,0,0.15); }
+    50% { transform: translateY(-20px); box-shadow: 0 60px 100px rgba(0,0,0,0.1); } /* Si alza e l'ombra si fa più morbida */
+    100% { transform: translateY(0px); box-shadow: 0 40px 80px rgba(0,0,0,0.15); }
+}
+
+/* --- Titolo in Primo Piano (Effetto Camaleonte) --- */
+.foreground-title {
+    font-size: 4.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    z-index: 3;
+    margin-top: -60px;
+    text-align: center;
+    
+    /* Le due righe magiche: */
+    color: #ffffff; 
+    mix-blend-mode: difference; 
+}
+
+/* --- Testo Centrale e Linea di Gravità --- */
+.levitation-text-box {
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    margin-top: 20px;
+}
+
+.gravity-line {
+    width: 1px;
+    height: 60px;
+    background-color: #a87b51; /* Linea color terra/oro */
+    margin: 0 auto 30px auto;
+}
+
+.levitation-text-box .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.acro-lead {
+    font-size: 1.3rem;
+    color: #333;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    margin-bottom: 25px;
+}
+
+.levitation-text-box p:not(.acro-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 900px) {
+    .bg-typography {
+        font-size: 8rem;
+        top: 20px;
+    }
+    .floating-image-wrapper {
+        width: 80%; /* Si allarga su mobile */
+    }
+    .foreground-title {
+        font-size: 2.8rem;
+        margin-top: -40px;
+    }
+    .levitation-text-box {
+        padding: 0 20px;
+    }
+}
+
+/* =========================================
+   LAYOUT CONTAMINATO (COLLAGE)
+   ========================================= */
+
+.contaminato-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+    overflow: hidden; /* Evita sbavature orizzontali dovute agli incastri */
+}
+
+/* --- Hero Superiore --- */
+.contaminato-hero {
+    max-width: 1200px;
+    margin: 0 auto 150px auto;
+    display: flex;
+    align-items: center;
+    gap: 0; /* Nessun gap, usiamo l'accavallamento */
+}
+
+.hero-text-box {
+    flex: 1.1;
+    background-color: #ffffff;
+    padding: 60px 70px;
+    z-index: 2; /* Sta sopra l'immagine */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+}
+
+.hero-text-box .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.contaminato-title {
+    font-size: 4.8rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1;
+    margin-bottom: 30px;
+}
+
+.contaminato-lead {
+    font-size: 1.15rem;
+    color: #a87b51;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    margin-bottom: 25px;
+}
+
+.hero-text-box p:not(.contaminato-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 15px;
+}
+
+.hero-image-box {
+    flex: 1;
+    height: 600px;
+    z-index: 1;
+    margin-left: -80px; /* L'immagine scivola SOTTO il riquadro di testo! */
+}
+
+.hero-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(20%) grayscale(20%); /* Leggero filtro vintage/urbano */
+}
+
+/* --- Collage a Incastro (Le 3 Sezioni) --- */
+.contaminato-collage {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.collage-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Base per le immagini e i testi del collage */
+.c-image {
+    width: 55%;
+    aspect-ratio: 4 / 3;
+    z-index: 1;
+}
+
+.c-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.c-text {
+    width: 45%;
+    background-color: #ffffff;
+    padding: 50px;
+    z-index: 2; /* I testi coprono le foto */
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+}
+
+.c-num {
+    position: absolute;
+    top: -40px;
+    right: 20px;
+    font-size: 5rem;
+    font-weight: 300;
+    color: rgba(168, 123, 81, 0.2); /* Filigrana color terra */
+    line-height: 1;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.c-text h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.c-text p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Gli Incastri Specifici (La magia del layout) */
+
+/* Item 1: Testo invade la foto a sinistra */
+.item-one .c-text {
+    margin-left: -10%;
+    margin-top: 50px; /* Si sfalsa verso il basso */
+}
+
+/* Item 2: Testo invade la foto a destra, e tutto il blocco invade l'Item 1 in altezza! */
+.item-two {
+    align-self: flex-end; /* Si allinea a destra */
+    margin-top: -80px; /* Sale per coprire parzialmente l'Item 1 */
+}
+.item-two .c-image {
+    width: 50%;
+}
+.item-two .c-text {
+    width: 50%;
+    margin-right: -10%; /* Invade l'immagine */
+}
+
+/* Item 3: Torna a sinistra e invade l'Item 2 */
+.item-three {
+    margin-top: -100px; /* Sale per coprire pesantemente l'Item 2 */
+}
+.item-three .c-image {
+    width: 60%;
+}
+.item-three .c-text {
+    width: 45%;
+    margin-left: -15%;
+    margin-top: -40px;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .contaminato-hero {
+        flex-direction: column;
+        margin-bottom: 80px;
+    }
+    .hero-text-box {
+        padding: 40px 30px;
+    }
+    .hero-image-box {
+        width: 100%;
+        height: 400px;
+        margin-left: 0;
+        margin-top: -40px; /* Mantiene un piccolo incastro verticale */
+    }
+    .collage-item {
+        flex-direction: column;
+        margin-top: 0 !important; /* Disabilita gli accavallamenti verticali su mobile */
+        margin-bottom: 60px;
+        align-self: center !important;
+    }
+    /* Annulla l'inversione della riga 2 per i cellulari */
+    .item-two {
+        flex-direction: column-reverse; 
+    }
+    .c-image, .c-text {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .c-text {
+        margin-top: -30px !important; /* Semplice sovrapposizione dal basso per tutti */
+        width: 90% !important;
+        padding: 40px 30px;
+    }
+}
+
+/* =========================================
+   LAYOUT DANZA 
+   ========================================= */
+
+/* =========================================
+   LAYOUT AVVIAMENTO (SOFT BUBBLE)
+   ========================================= */
+
+.avviamento-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+}
+
+/* --- Hero Superiore Morbido --- */
+.avviamento-hero {
+    max-width: 1100px;
+    margin: 0 auto 120px auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.avviamento-text-side {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.avviamento-text-side .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.avviamento-title {
+    font-size: 4.5rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.05;
+    margin-bottom: 30px;
+}
+
+.avviamento-lead {
+    font-size: 1.25rem;
+    color: #a87b51;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.avviamento-text-side p:not(.avviamento-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.avviamento-image-side {
+    flex: 1;
+}
+
+/* Immagine a forma di pillola/arco per dare tenerezza */
+.soft-pill-image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 120px 40px 120px 40px; /* Bordi molto arrotondati, ma in modo asimmetrico */
+    overflow: hidden;
+    background-color: #e2ddce;
+    box-shadow: 0 20px 50px rgba(168, 123, 81, 0.1); /* Ombra calda */
+}
+
+.soft-pill-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(10%); /* Scalda leggermente la foto */
+}
+
+/* --- I 3 Focus a Medaglione (Per testi corti) --- */
+.bubble-grid-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex; /* Mette gli oblò in riga */
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.bubble-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra tutto perfettamente */
+    text-align: center;
+}
+
+/* Gli Oblò Fotografici (Cerchi perfetti) */
+.bubble-img {
+    width: 200px; /* Non troppo grandi */
+    height: 200px;
+    border-radius: 50%; /* Crea il cerchio perfetto */
+    overflow: hidden;
+    margin-bottom: 30px;
+    border: 8px solid #ffffff; /* Cornice bianca spessa per dare un senso di purezza */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.bubble-card:hover .bubble-img {
+    transform: translateY(-10px); /* L'oblò fa un saltello in su al passaggio del mouse */
+    border-color: #e2ddce; /* La cornice si colora leggermente */
+}
+
+.bubble-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bubble-card h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+.bubble-card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    max-width: 250px; /* Tiene il testo raccolto sotto l'oblò */
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 900px) {
+    .avviamento-hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 50px;
+    }
+    .avviamento-text-side {
+        padding-right: 0;
+    }
+    .avviamento-title {
+        font-size: 3.5rem;
+    }
+    .soft-pill-image {
+        border-radius: 80px 30px 80px 30px; /* Riduce l'arrotondamento per schermi piccoli */
+    }
+    .bubble-grid-section {
+        flex-direction: column; /* Gli oblò si impilano uno sotto l'altro */
+        gap: 60px;
+    }
+}
+
+/* =========================================
+   LAYOUT EDUCAZIONE (ACCADEMIA CLASSICA)
+   ========================================= */
+
+.educazione-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+}
+
+/* --- Hero Superiore --- */
+.academy-hero {
+    max-width: 1150px;
+    margin: 0 auto 120px auto;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+}
+
+.academy-text-side {
+    flex: 1.1;
+    padding-right: 20px;
+}
+
+.academy-text-side .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.academy-title {
+    font-size: 4.8rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.05;
+    margin-bottom: 40px;
+}
+
+/* LA MAGIA 1: Il Capolettera Gigante (Drop-Cap) */
+.drop-cap-lead::first-letter {
+    font-size: 5.5rem;
+    font-family: 'Georgia', serif; /* Font classico per la lettera gigante */
+    color: #a87b51;
+    float: left; /* Permette al testo di girarci attorno */
+    margin-right: 15px;
+    line-height: 0.85; /* Allinea perfettamente la lettera al testo */
+    margin-top: 8px;
+}
+
+.drop-cap-lead {
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.9;
+    margin-bottom: 25px;
+}
+
+.academy-text-side p:not(.drop-cap-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+}
+
+.academy-image-side {
+    flex: 1;
+}
+
+/* Immagine con blocco offset classico */
+.offset-frame-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    z-index: 2;
+}
+
+.offset-frame-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+}
+
+.offset-frame-image::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    right: -30px;
+    bottom: -30px;
+    left: 30px;
+    border: 1px solid #a87b51; /* Cornice sottile dorata sfalsata */
+    z-index: 1;
+}
+
+/* --- I 3 Focus: Le Carte d'Arte (Art Cards) --- */
+.art-cards-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+/* LA MAGIA 2: La Carta con Passepartout */
+.art-card {
+    background-color: #ffffff;
+    padding: 30px; /* Spazio interno bianco */
+    position: relative;
+    /* Crea la riga dorata all'interno della carta! */
+    outline: 1px solid rgba(168, 123, 81, 0.3); 
+    outline-offset: -15px; /* Sposta la riga verso l'interno di 15 pixel */
+    
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    cursor: default;
+}
+
+.art-card:hover {
+    transform: translateY(-15px); /* Si solleva dolcemente */
+    box-shadow: 0 25px 50px rgba(0,0,0,0.06);
+    outline-color: rgba(168, 123, 81, 0.8); /* La cornice diventa più accesa */
+}
+
+.art-card-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2; /* Per stare sopra la cornice outline se serve */
+}
+
+.art-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(80%); /* Quasi in bianco e nero */
+    transition: filter 0.5s ease, transform 0.8s ease;
+}
+
+.art-card:hover .art-card-img img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.art-card-text {
+    text-align: center;
+    position: relative;
+    z-index: 2; /* Per stare sopra la cornice outline */
+}
+
+.art-card-text h3 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+.art-card-text p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.7;
+    /* Anche se il testo è corto, in questo contenitore sembrerà perfetto */
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .academy-hero {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .academy-title {
+        font-size: 3.8rem;
+    }
+    .offset-frame-image {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .offset-frame-image::after {
+        right: -15px;
+        bottom: -15px;
+    }
+    .art-cards-section {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .art-card {
+        padding: 40px 30px;
+    }
+}
+
+/* =========================================
+   LAYOUT DANZA CLASSICA (GRAZIA NEOCLASSICA)
+   ========================================= */
+
+.classica-page {
+    background-color: #F6F3EB; /* Il tuo elegante crema */
+    padding: 180px 5% 150px 5%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.neoclassic-container {
+    max-width: 1150px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+/* --- Lato Testo --- */
+.neoclassic-text-side {
+    flex: 1.1;
+    z-index: 2; /* Sta leggermente sopra */
+}
+
+.neoclassic-text-side .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.neoclassic-title {
+    font-size: 5rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 0.9;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+/* La parola "Classica" scritta in stile romantico/accademico */
+.title-serif {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 6.5rem;
+    color: #a87b51;
+    text-transform: none; /* Lascia le minuscole normali per il corsivo */
+    letter-spacing: 0;
+    display: block;
+    margin-top: 5px;
+    margin-left: 40px; /* Sfalsato leggermente a destra */
+}
+
+.neoclassic-content {
+    max-width: 450px; /* Tiene il testo compatto e facilissimo da leggere */
+    margin-left: 40px; /* Si allinea con la parola 'Classica' */
+}
+
+.neoclassic-lead {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.neoclassic-content p:not(.neoclassic-lead) {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 2;
+    margin-bottom: 20px;
+}
+
+/* --- Lato Immagine (La Cornice da Museo) --- */
+.neoclassic-image-side {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* La cornice esterna con il bordo dorato */
+.museum-frame {
+    background-color: transparent;
+    border: 1px solid rgba(168, 123, 81, 0.5); /* Bordo sottile color terra/oro */
+    padding: 15px; /* Crea lo spazio vuoto (passepartout) */
+    width: 90%; /* Regola la larghezza dell'opera */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+}
+
+/* Il passepartout interno bianco */
+.museum-matting {
+    background-color: #ffffff;
+    padding: 10px;
+    aspect-ratio: 3 / 4; /* Formato ritratto classico */
+}
+
+.museum-matting img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1.05) contrast(0.95); /* Effetto morbido e luminoso, perfetto per la classica */
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .neoclassic-container {
+        flex-direction: column;
+        gap: 60px;
+    }
+    .neoclassic-text-side {
+        padding-right: 0;
+        text-align: center;
+    }
+    .neoclassic-title {
+        font-size: 4rem;
+    }
+    .title-serif {
+        font-size: 5rem;
+        margin-left: 0;
+    }
+    .neoclassic-content {
+        margin-left: 0;
+        max-width: 100%;
+        padding: 0 20px;
+    }
+    .neoclassic-image-side {
+        justify-content: center;
+        width: 100%;
+    }
+    .museum-frame {
+        width: 100%;
+    }
+}
+
+/* =========================================
+   LAYOUT MODERN (LINEA DEL BARICENTRO)
+   ========================================= */
+
+.modern-page {
+    background-color: #F6F3EB;
+    padding: 180px 5% 150px 5%;
+    overflow: hidden;
+}
+
+/* --- 1. La sezione principale (Ancoraggio obbligatorio per i posizionamenti assoluti) --- */
+.modern-hero-section {
+    max-width: 1200px;
+    margin: 0 auto 180px auto;
+    position: relative; /* Questo impedisce alla scritta di scappare o tagliarsi in alto */
+    display: flex;
+    align-items: center;
+    padding-top: 80px; /* Spazio extra in alto per ospitare la scritta gigante */
+}
+
+/* --- 2. La Scritta Gigante (Ora perfettamente visibile, centrata e maestosa) --- */
+.m-huge-bg {
+    position: absolute;
+    top: -30px; /* Spostata leggermente per non essere tagliata dal margine superiore */
+    left: 0;
+    width: 100%; /* Si estende per tutta la larghezza per garantire la leggibilità */
+    text-align: left;
+    font-size: 13rem; /* Dimensioni generose per l'effetto poster */
+    font-weight: 800;
+    text-transform: uppercase;
+    /* Un colore oro/crema leggermente più saturo per non sparire del tutto, ma con opacità per restare in secondo piano */
+    color: rgba(168, 123, 81, 0.15); 
+    z-index: 1; /* DIETRO la foto e DIETRO il testo */
+    letter-spacing: 12px; /* Spaziatura elegante */
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* --- 3. L'Immagine (Adesso ha un livello superiore per coprire parzialmente la scritta) --- */
+.m-hero-image {
+    width: 63%; /* Leggermente ridotta per dare più respiro al layout */
+    aspect-ratio: 4 / 3;
+    position: relative;
+    z-index: 2; /* Sta sopra alla scritta gigante */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+}
+
+.m-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.05) grayscale(10%);
+}
+
+/* --- 4. Il Pannello di Testo (Più snello e spostato a destra per non coprire le ballerine) --- */
+.m-hero-text-panel {
+    position: absolute;
+    right: -20px; /* Sfalsato a destra per evitare sovrapposizioni con l'immagine */
+    top: 55%; /* Spostato leggermente in basso per un look asimmetrico moderno */
+    transform: translateY(-50%);
+    width: 42%;
+    background-color: #ffffff;
+    padding: 55px 50px;
+    z-index: 3; /* In primo piano */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+}
+
+.m-hero-text-panel .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.m-hero-text-panel h2 {
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: #222222;
+}
+
+.m-hero-text-panel p {
+    font-size: 0.88rem;
+    color: #555555;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.m-hero-text-panel p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- 4. Sottotitolo "L'Arte del Contrasto" --- */
+.m-lead {
+    font-size: 1.1rem;
+    color: #a87b51;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    margin-bottom: 20px;
+}
+
+/* --- 5. I Paragrafi del Pannello --- */
+.m-hero-text-panel p:not(.m-lead) {
+    font-size: 0.88rem; /* Testo leggermente più compatto per stare in un box più snello */
+    color: #555555;
+    line-height: 1.75;
+    margin-bottom: 15px;
+}
+
+/* --- I 3 Focus: La Linea del Baricentro --- */
+.baricentro-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    padding: 60px 0;
+}
+
+/* LA LINEA CENTRALE: attraversa tutta la sezione */
+.plumb-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: rgba(168, 123, 81, 0.4);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+/* Le righe dell'intreccio */
+.weave-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 120px;
+    position: relative;
+}
+
+.weave-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Immagini attaccate al centro */
+.weave-image {
+    position: relative;
+    z-index: 2;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+.weave-image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Testi che si accavallano sulle immagini */
+.weave-text {
+    background-color: #ffffff;
+    padding: 50px;
+    position: relative;
+    z-index: 3; /* Sta sopra l'immagine */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+}
+
+/* PALLINO DI ANCORAGGIO ALLA LINEA CENTRALE */
+.weave-dot {
+    position: absolute;
+    top: 50px;
+    width: 11px;
+    height: 11px;
+    background-color: #a87b51;
+    border-radius: 50%;
+    z-index: 4;
+}
+
+.weave-num {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #a87b51;
+    margin-bottom: 15px;
+}
+
+.weave-text h3 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #222;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.weave-text p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+}
+
+/* INCASTRI SPECIFICI (Left vs Right) */
+
+/* Riga 1 e 3: Testo a Sinistra, Immagine a Destra */
+.text-left {
+    margin-right: -80px; /* Il box di testo scivola verso destra sopra la foto */
+    margin-left: 40px; /* Spazio dal bordo esterno */
+}
+.text-left .weave-dot {
+    right: -86px; /* Posiziona il pallino esattamente sulla linea centrale */
+}
+.img-right {
+    margin-right: 40px;
+}
+
+/* Riga 2: Immagine a Sinistra, Testo a Destra */
+.text-right {
+    margin-left: -80px; /* Il box di testo scivola verso sinistra sopra la foto */
+    margin-right: 40px;
+}
+.text-right .weave-dot {
+    left: -86px; /* Posiziona il pallino esattamente sulla linea centrale */
+}
+.img-left {
+    margin-left: 40px;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .modern-hero-section {
+        flex-direction: column;
+        margin-bottom: 100px;
+    }
+    .m-huge-bg { font-size: 7rem; top: -30px; left: 0; }
+    .m-hero-image { width: 100%; height: 400px; }
+    .m-hero-text-panel {
+        position: relative;
+        width: 90%;
+        transform: translateY(-50px); /* Sale da sotto invece che da destra */
+        padding: 40px 30px;
+    }
+    .m-hero-text-panel h2 { font-size: 2.8rem; }
+    
+    .plumb-line { display: none; } /* Su mobile togliamo la linea centrale */
+    .weave-row {
+        grid-template-columns: 1fr; /* Le righe tornano normali (1 colonna) */
+        gap: 0;
+        margin-bottom: 80px;
+    }
+    .reverse-row { display: flex; flex-direction: column-reverse; } /* Riordina la riga 2 */
+    
+    .weave-image { width: 100%; margin: 0 !important; }
+    .weave-text {
+        margin: -50px 5% 0 5% !important; /* Tutti i box testo si accavallano dal basso */
+        width: 90%;
+        padding: 40px 30px;
+    }
+    .weave-dot { display: none; } /* Via i pallini su mobile */
+}
+
+/* =========================================
+   LAYOUT DANZA CONTEMPORANEA (ASTRAZIONE VERTICALE)
+   ========================================= */
+
+/* Nota: Togliamo il padding destro per permettere all'immagine di sfondare lo schermo */
+.contemporanea-page {
+    background-color: #F6F3EB;
+    padding: 160px 0 120px 5%; /* Padding destro a zero! */
+    overflow-x: hidden;
+}
+
+/* --- 1. La Griglia Invalicabile --- */
+.avant-hero {
+    max-width: 1300px;
+    margin: 0 auto 160px auto;
+    
+    /* Usiamo Grid per creare due colonne fisicamente separate */
+    display: grid;
+    grid-template-columns: 55% 40%; /* 55% al testo, 40% all'immagine, 5% di spazio vuoto in mezzo */
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- 2. Il Contenitore del Testo --- */
+.avant-hero-text {
+    width: 100%; /* Prende tutto il suo 55% senza limitazioni */
+    padding-right: 0;
+    margin-left: -50px;
+}
+
+.avant-hero-text .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* --- 3. Il Titolo Elastico (Fluid Typography) --- */
+.avant-title {
+    /* LA MAGIA: minimo 2.5rem, massimo 5.2rem. In mezzo scala al 4.5% della larghezza dello schermo! */
+    font-size: clamp(2.5rem, 4.5vw, 5.2rem); 
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #222222;
+    text-shadow: none; 
+    word-break: normal;
+    hyphens: none;
+}
+
+.avant-lead {
+    font-size: 1.15rem;
+    color: #a87b51;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.avant-hero-text p:not(.avant-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* --- 4. L'Immagine Confinata --- */
+.avant-hero-image {
+    width: 100%; /* Si adatta perfettamente al suo 40% */
+    height: 520px;
+}
+
+.avant-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 40px 0 0 40px;
+    box-shadow: -15px 15px 40px rgba(0,0,0,0.04);
+}
+
+/* --- I 3 Focus (La Tipografia Verticale) --- */
+.avant-grid-section {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding-right: 5%; /* Ripristina il padding destro per questa sezione */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+
+.avant-card {
+    display: flex; /* Mette in riga il blocco orizzontale e il contenuto */
+    gap: 20px;
+}
+
+/* LA MAGIA 2: Il contenitore laterale ruotato */
+.avant-vert-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra gli elementi sulla linea verticale */
+    width: 30px;
+    flex-shrink: 0;
+}
+
+.avant-num {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #a87b51;
+    margin-bottom: 15px;
+}
+
+.vert-line {
+    width: 1px;
+    height: 40px;
+    background-color: rgba(168, 123, 81, 0.4);
+    margin-bottom: 20px;
+}
+
+/* Testo che corre dal basso verso l'alto */
+.avant-vert-side h3 {
+    writing-mode: vertical-rl; /* Modalità scrittura verticale */
+    transform: rotate(180deg); /* Lo gira in modo che si legga dal basso in alto */
+    font-size: 1.4rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #222;
+    white-space: nowrap; /* Evita che vada a capo in modo strano */
+}
+
+/* Il contenuto normale della card */
+.avant-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.avant-img {
+    width: 100%;
+    aspect-ratio: 4 / 5; /* Rettangolo verticale */
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.avant-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(40%) contrast(1.1);
+    transition: transform 0.6s ease;
+}
+
+.avant-card:hover .avant-img img {
+    transform: scale(1.05); /* Zoom morbido e profondo */
+}
+
+.avant-content p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.85;
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .contemporanea-page {
+        padding-right: 5%; /* Su mobile serve il margine a destra */
+    }
+     .avant-hero {
+        grid-template-columns: 1fr; /* Torna a 1 singola colonna */
+        gap: 60px;
+    }
+    .avant-hero-text {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+    .avant-title {
+        font-size: 4rem;
+    }
+    .avant-hero-image {
+        height: 400px;
+    }
+    .avant-hero-image img {
+        border-radius: 40px; /* Arrotonda tutti i bordi su mobile */
+    }
+    .avant-grid-section {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    .avant-card {
+        flex-direction: column; /* Su cellulare torna tutto impilato normalmente per leggibilità */
+        gap: 15px;
+    }
+    .avant-vert-side {
+        width: 100%;
+        flex-direction: row; /* Il blocco non è più verticale */
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .avant-vert-side h3 {
+        writing-mode: horizontal-tb; /* Il testo torna normale! */
+        transform: none;
+    }
+    .vert-line {
+        width: 40px;
+        height: 1px;
+        margin-bottom: 0;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .avant-num {
+        margin-bottom: 0;
+    }
+}
+
+/* =========================================
+   LAYOUT DANZA C. ADULTI (MINIMALISMO EDITORIALE)
+   ========================================= */
+
+.adulti-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+}
+
+/* --- Hero Superiore (Griglia 50/50 Infallibile) --- */
+.adulti-hero {
+    max-width: 1200px;
+    margin: 0 auto 150px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Due colonne identiche e inviolabili */
+    gap: 80px; /* Uno spazio enorme che fa da "muro" tra testo e foto */
+    align-items: center;
+}
+
+.adulti-text-box {
+    padding-right: 20px;
+}
+
+.adulti-text-box .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 25px;
+}
+
+/* Il titolo su due righe previene ogni problema di spazio */
+.adulti-title {
+    font-size: 4.2rem; /* Misura equilibrata */
+    font-weight: 300;
+    color: #222;
+    line-height: 1;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.title-serif {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    color: #a87b51;
+    font-size: 4.8rem;
+    text-transform: none; /* Lascia le minuscole eleganti */
+    letter-spacing: 0;
+    display: block;
+    margin-top: 10px;
+}
+
+.adulti-lead {
+    font-size: 1.15rem;
+    color: #555;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.adulti-text-box p:not(.adulti-lead) {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.adulti-image-box {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    position: relative;
+    /* Nessun posizionamento strano, un box pulito */
+}
+
+.adulti-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px; /* Un bordo appena accennato per eleganza */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+}
+
+/* --- I 3 Focus (Le Colonne Editoriali Sospese) --- */
+.adulti-columns-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+}
+
+.editorial-col {
+    display: flex;
+    flex-direction: column;
+    /* La riga sottile in alto che chiude il design */
+    border-top: 1px solid rgba(168, 123, 81, 0.4); 
+    padding-top: 30px;
+}
+
+.col-text-area {
+    margin-bottom: 40px;
+}
+
+.col-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #a87b51;
+    margin-bottom: 15px;
+}
+
+.col-text-area h3 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #222;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.col-text-area p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* Spinge l'immagine in fondo alla colonna, allineandole tutte! */
+.col-img-area {
+    margin-top: auto; 
+    width: 100%;
+    aspect-ratio: 4 / 3; /* Formato paesaggio pulito */
+    overflow: hidden;
+}
+
+.col-img-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(15%) grayscale(20%); /* Filtro sofisticato e maturo */
+    transition: transform 0.6s ease;
+}
+
+.editorial-col:hover .col-img-area img {
+    transform: scale(1.03); /* Leggero zoom al passaggio del mouse */
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .adulti-hero {
+        grid-template-columns: 1fr; /* Mette la foto sotto il testo */
+        gap: 50px;
+    }
+    .adulti-text-box {
+        padding-right: 0;
+    }
+    .adulti-title {
+        font-size: 3.5rem;
+    }
+    .title-serif {
+        font-size: 4rem;
+    }
+    .adulti-columns-section {
+        grid-template-columns: 1fr; /* Colonna singola per cellulari */
+        gap: 70px;
+    }
+    .editorial-col {
+        border-top: 2px solid rgba(168, 123, 81, 0.4); /* Riga più spessa su mobile per dividere meglio */
+    }
+}
+
+/* =========================================
+   LAYOUT CONTACT IMPROVISATION (LIQUID GRID)
+   ========================================= */
+
+.contact-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+    overflow: hidden;
+}
+
+/* --- Hero Superiore (Pennellata e Flusso) --- */
+.contact-hero {
+    max-width: 1200px;
+    margin: 0 auto 160px auto;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.contact-hero-text {
+    flex: 1;
+}
+
+.contact-hero-text .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.contact-title {
+    font-size: 5rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 0.95;
+    margin-bottom: 35px;
+    letter-spacing: 2px;
+}
+
+/* Corsivo dinamico sfasato in basso */
+.contact-title .title-serif {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 5.5rem;
+    color: #a87b51;
+    text-transform: none;
+    letter-spacing: 0;
+    display: block;
+    margin-top: 5px;
+    margin-left: 50px;
+}
+
+.contact-lead {
+    font-size: 1.15rem;
+    color: #a87b51;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.contact-hero-text p:not(.contact-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.contact-hero-image {
+    flex: 1.1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/* LA MAGIA 1: L'Immagine nella "Pennellata" artistica (Usa SVG o Maschera) */
+.brush-mask {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    position: relative;
+    /* Sagoma liquida asimmetrica che simula la pennellata artistica dell'anteprima */
+    clip-path: polygon(9% 10%, 85% 3%, 100% 25%, 90% 85%, 65% 100%, 15% 90%, 0% 50%);
+    background-color: #e2ddce;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+}
+
+.brush-mask img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+    filter: brightness(1.05) contrast(0.95);
+}
+
+/* --- I 3 Focus con Linea di Flusso --- */
+.contact-stream-grid {
+    max-width: 1250px;
+    margin: 0 auto;
+    position: relative;
+    display: flex; /* Disposizione orizzontale asimmetrica */
+    justify-content: space-between;
+    gap: 40px;
+    padding: 80px 0;
+}
+
+/* La linea di flusso (SVG) che taglia la pagina */
+.stream-line {
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    width: 110%;
+    height: auto;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.contact-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2; /* Sopra la linea */
+    transition: transform 0.5s ease;
+}
+
+/* ALTEZZE DI CONTATTO SFALSATE (L'ascolto fisico) */
+.step-left {
+    transform: translateY(-40px); /* Sale leggermente */
+}
+.step-center {
+    transform: translateY(40px); /* Scende */
+}
+.step-right {
+    transform: translateY(-10px);
+}
+
+.contact-img-box {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    margin-bottom: 30px;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+    border-radius: 20px; /* Bordi leggermente smussati per morbidezza */
+}
+
+.contact-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Il Grande Numero a contrasto asimmetrico */
+.contact-num {
+    position: absolute;
+    bottom: -15px;
+    right: 20px;
+    font-size: 5.5rem;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(168, 123, 81, 0.15); /* Filigrana leggera */
+    line-height: 1;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Card di testo */
+.contact-card-text {
+    padding: 0 15px;
+    position: relative;
+}
+
+.contact-card-text h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+.contact-card-text p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.7;
+}
+
+/* Movimento asimmetrico delle card in hover */
+.contact-card:hover {
+    transform: scale(1.03) translateY(-10px); /* Un piccolo "salto" al passaggio */
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .contact-hero {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .contact-title {
+        font-size: 4rem;
+    }
+    .contact-title .title-serif {
+        font-size: 4.5rem;
+        margin-left: 0;
+    }
+    .contact-hero-image {
+        width: 100%;
+    }
+    .brush-mask {
+        /* Togliamo il taglio complesso su mobile per non penalizzare l'immagine */
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        border-radius: 40px;
+    }
+    .contact-stream-grid {
+        flex-direction: column; /* Le tre card si impilano */
+        gap: 60px;
+        padding: 0;
+    }
+    .step-left, .step-center, .step-right {
+        transform: translateY(0) !important; /* Annulla i dislivelli su mobile */
+    }
+    .stream-line {
+        display: none; /* Nascondi la linea di flusso */
+    }
+}
+
+/* =========================================
+   LAYOUT MOVIMENTO CREATIVO (TELA ANIMATA)
+   ========================================= */
+
+.creativo-page {
+    background-color: #F6F3EB;
+    padding: 160px 5% 120px 5%;
+}
+
+/* --- Hero Superiore (Infallibile) --- */
+.creativo-hero {
+    max-width: 1200px;
+    margin: 0 auto 160px auto;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.creativo-text-box {
+    flex: 1;
+}
+
+.creativo-text-box .eyebrow {
+    color: #a87b51;
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 25px;
+}
+
+.creativo-title {
+    font-size: 4.8rem;
+    font-weight: 300;
+    color: #222;
+    line-height: 1.05;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.creativo-title .title-serif {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 5.5rem;
+    color: #a87b51;
+    text-transform: none;
+    letter-spacing: 0;
+    display: block;
+    margin-top: 5px;
+}
+
+.creativo-lead {
+    font-size: 1.15rem;
+    color: #a87b51;
+    font-weight: 400;
+    font-style: italic;
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.creativo-text-box p:not(.creativo-lead) {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+/* --- L'Immagine Animata (Morphing Blob) --- */
+.creativo-image-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.morphing-blob {
+    width: 90%;
+    aspect-ratio: 1 / 1; /* Un quadrato di base */
+    overflow: hidden;
+    /* L'animazione continua che cambia la forma */
+    animation: morph 8s ease-in-out infinite;
+    box-shadow: 0 30px 60px rgba(168, 123, 81, 0.15); /* Ombra calda che segue la forma */
+}
+
+.morphing-blob img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1); /* Evita bordi vuoti durante la deformazione */
+}
+
+/* I Fotogrammi dell'animazione: deforma i raggi degli angoli */
+@keyframes morph {
+    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+/* --- I 3 Focus: Galleria Asimmetrica --- */
+.creativo-gallery-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 120px; /* Grande respiro tra un blocco e l'altro */
+}
+
+.creative-card {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.c-text-wrapper {
+    flex: 1;
+}
+
+.c-text-wrapper h3 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #222;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.c-text-wrapper p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* 01. Verticale */
+.card-portrait .c-img-wrapper {
+    flex: 0.8;
+    aspect-ratio: 3 / 4;
+    border-radius: 20px 100px 20px 20px; /* Angolo in alto a destra molto smussato */
+}
+
+/* 02. Orizzontale (Testo a sx, Immagine a dx) */
+.card-landscape {
+    flex-direction: row; /* Ordine inverso gestito dall'HTML */
+}
+.card-landscape .c-img-wrapper {
+    flex: 1.2;
+    aspect-ratio: 16 / 9;
+    border-radius: 100px 20px 20px 100px; /* Lati curvi asimmetrici */
+}
+.text-right {
+    text-align: right;
+}
+
+/* 03. Terza Forma (Sostituisce il cerchio) */
+.card-terza .c-img-wrapper {
+    flex: 0.9; /* Leggermente più piccola della seconda per dare ritmo */
+    aspect-ratio: 4 / 3; /* Formato rettangolare morbido */
+    /* Crea la curva asimmetrica opposta: l'angolo in basso a destra diventa molto arrotondato */
+    border-radius: 20px 20px 100px 20px; 
+}
+
+.c-img-wrapper {
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+}
+.c-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+.creative-card:hover .c-img-wrapper img {
+    transform: scale(1.05);
+}
+
+/* --- Adattamento per Smartphone --- */
+@media (max-width: 950px) {
+    .creativo-hero {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .creativo-title {
+        font-size: 4rem;
+    }
+    .creativo-title .title-serif {
+        font-size: 4.5rem;
+    }
+    .morphing-blob {
+        width: 100%;
+    }
+    .creative-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    .card-landscape .c-img-wrapper, .card-portrait .c-img-wrapper {
+        flex: auto;
+        width: 100%;
+        border-radius: 30px; /* Normalizza i bordi su mobile */
+    }
+    .text-right {
+        text-align: center;
+    }
+    .card-circle .c-img-wrapper {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* --- Abilita lo scorrimento fluido (Smooth Scroll) in tutto il sito --- */
+html {
+    scroll-behavior: smooth;
+}
