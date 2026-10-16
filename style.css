@@ -4374,3 +4374,237 @@ body {
 html {
     scroll-behavior: smooth;
 }
+
+/* =========================================
+   RESPONSIVE GLOBALE (MENU, SOSTENITORI, FOOTER, SMARTPHONE)
+   ========================================= */
+
+/* Il pulsante hamburger (creato da script.js) è nascosto su desktop */
+.nav-toggle {
+    display: none;
+}
+
+/* In Movimento Creativo la classe .text-right eredita i margini negativi del layout Modern:
+   sotto i 1200px il testo uscirebbe dallo schermo */
+@media (max-width: 1200px) {
+    .c-text-wrapper.text-right {
+        margin: 0;
+    }
+}
+
+/* --- Menu mobile (sotto i 1300px le 9 voci non stanno più su una riga) --- */
+@media (max-width: 1300px) {
+    .main-header {
+        padding: 10px 20px;
+    }
+    .logo {
+        height: 55px;
+    }
+
+    .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .nav-toggle span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #222;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-open .nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Il menu diventa un pannello a scomparsa sotto l'intestazione */
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #F6F3EB;
+        max-height: calc(100vh - 75px);
+        overflow-y: auto;
+        padding: 10px 20px 25px 20px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+    }
+    .nav-open .nav-menu {
+        display: block;
+    }
+    .nav-menu ul {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+    .nav-menu > ul > li {
+        border-bottom: 1px solid #e2ddce;
+    }
+    .nav-menu > ul > li > a {
+        display: block;
+        padding: 15px 0;
+        font-size: 0.9rem;
+    }
+
+    /* Le tendine si aprono al tocco (classe .open) invece che al passaggio del mouse */
+    .nav-menu .dropdown:hover .dropdown-content {
+        display: none !important;
+    }
+    .nav-menu .dropdown.open .dropdown-content {
+        display: flex !important;
+    }
+    .nav-menu .dropdown-content,
+    .nav-menu ul li:last-child .dropdown-content,
+    .nav-menu ul li:nth-last-child(2) .dropdown-content {
+        position: static;
+        min-width: 0;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: transparent;
+        padding: 0 0 10px 15px;
+    }
+    .dropdown-content a {
+        padding: 10px 0;
+        white-space: normal;
+    }
+}
+
+/* --- Tablet e smartphone --- */
+@media (max-width: 950px) {
+    /* Evita lo scorrimento orizzontale causato dalle scritte giganti decorative */
+    html, body {
+        overflow-x: clip;
+    }
+
+    /* Sostenitori: titolo sopra, loghi sotto */
+    .sostenitori {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 25px;
+        padding: 30px 20px;
+    }
+    .sostenitori-title {
+        flex: none;
+        text-align: center;
+    }
+    .sostenitori-title h3 {
+        font-size: 1.5rem;
+    }
+    .carousel-track {
+        gap: 40px;
+    }
+    .carousel-track img {
+        height: 40px;
+    }
+
+    /* Footer impilato */
+    .elegant-dark-footer {
+        padding: 60px 20px 30px 20px;
+    }
+    .elegant-dark-footer .footer-content {
+        flex-direction: column;
+        gap: 40px;
+        margin-bottom: 40px;
+    }
+    .elegant-dark-footer .footer-brand {
+        max-width: 100%;
+    }
+    .elegant-dark-footer .footer-info-grid {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 30px 50px;
+    }
+    .footer-bottom-dark {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .footer-bottom-dark .social-icons a {
+        margin: 0 10px;
+    }
+
+    /* Correzioni di layout rimaste sfalsate su mobile */
+    .avant-hero-text {
+        margin-left: 0;
+    }
+    .urban-title {
+        font-size: 4rem;
+    }
+    .contaminato-title {
+        font-size: 3.8rem;
+    }
+}
+
+/* --- Smartphone --- */
+@media (max-width: 600px) {
+    .elegant-dark-footer .footer-info-grid {
+        flex-direction: column;
+    }
+
+    /* Titoli ridimensionati per schermi stretti */
+    .wow-intro-card h1 { font-size: 2.2rem; }
+    .wow-intro-card { padding: 35px 25px; }
+    .manifesto-title { font-size: 2.2rem; }
+    .manifesto-dropcap { font-size: 1.1rem; }
+    .hero-title { font-size: 1.8rem; }
+    .atelier-title { font-size: 2.5rem; }
+    .age-title { font-size: 1.6rem; }
+    .formazione-title { font-size: 2.4rem; }
+    .yoga-title { font-size: 2.8rem; }
+    .feature-text h2 { font-size: 1.9rem; }
+    .pilates-main-title { font-size: 2.8rem; }
+    .asymmetric-text-box h2 { font-size: 1.8rem; }
+    .framed-main-title { font-size: 2.5rem; }
+    .monolite-title { font-size: 2.6rem; }
+    .title-line3 { margin-left: 0; }
+    .archway-title { font-size: 2.6rem; }
+    .accent-italic { font-size: 3rem; }
+    .organic-title { font-size: 2.4rem; }
+    .supporters-title { font-size: 2.4rem; }
+    .urban-title { font-size: 3rem; letter-spacing: -1px; }
+    .fashion-title { font-size: 3rem; }
+    .breaking-title { font-size: 3rem; }
+    .foreground-title { font-size: 2.2rem; }
+    .contaminato-title { font-size: 2.8rem; }
+    .avviamento-title { font-size: 2.6rem; }
+    .academy-title { font-size: 2.8rem; }
+    .neoclassic-title { font-size: 2.8rem; }
+    .m-hero-text-panel h2 { font-size: 2.1rem; }
+    .weave-text h3 { font-size: 1.8rem; }
+    /* "CONTEMPORANEA" in maiuscolo è una parola lunghissima: serve un corpo più piccolo */
+    .avant-title { font-size: 2rem; letter-spacing: 1px; }
+    .adulti-title { font-size: 2rem; letter-spacing: 1px; }
+    .avant-hero, .adulti-hero { grid-template-columns: minmax(0, 1fr); }
+    .contact-title { font-size: 2.8rem; }
+    .creativo-title { font-size: 2.8rem; }
+    .title-serif,
+    .contact-title .title-serif,
+    .creativo-title .title-serif { font-size: 3rem; }
+
+    /* Riquadri di testo con meno padding */
+    .overlap-text-card,
+    .supporters-text-card,
+    .hero-text-box,
+    .m-hero-text-panel,
+    .monolite-text-box { padding: 35px 22px; }
+    .c-text, .weave-text { padding: 30px 22px; }
+    .elegant-text-frame { padding-left: 20px; }
+    .frame-sub-info { padding-left: 22px; }
+
+    /* Immagini a altezza fissa più basse */
+    .overlap-image,
+    .supporters-image,
+    .breaking-image-side,
+    .hero-image-box,
+    .avant-hero-image,
+    .m-hero-image { height: 300px; }
+    .wow-image-wrapper { height: 45vh; }
+}
